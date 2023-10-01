@@ -337,6 +337,11 @@ return [
             'text'    => 'Movie management',
             'submenu' => [
                 [
+                    'text' => 'Category',
+                    'url' => 'admin/category',
+                    'icon' => 'fa-solid fa-layer-group'
+                ],
+                [
                     'text' => 'Movie',
                     'url'  => 'admin/movie',
                     'icon' => 'fa-solid fa-clapperboard',

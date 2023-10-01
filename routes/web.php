@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CinemaController;
 use App\Http\Controllers\DirectorController;
 use App\Http\Controllers\MovieController;
@@ -31,6 +32,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::resource('room', RoomController::class);
     Route::resource('performer', PerformerController::class);
     Route::resource('movie', MovieController::class);
+    Route::resource('category', CategoryController::class);
 });
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
