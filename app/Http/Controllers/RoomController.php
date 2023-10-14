@@ -12,6 +12,11 @@ class RoomController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->authorizeResource(Room::class, null, ['except' => ['index']]);
+    }
+
     public function index()
     {
         $rooms = Room::latest()->paginate(10);
@@ -51,7 +56,8 @@ class RoomController extends Controller
      */
     public function edit(Room $room)
     {
-        //
+        $cinemas = Cinema::all();
+        return view('room.edit', compact('room', 'cinemas'));
     }
 
     /**

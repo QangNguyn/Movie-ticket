@@ -9,8 +9,6 @@
                     {{ $value->name }}
                 </option>
             @endforeach
-        @else
-            <option selected disabled>No cinema</option>
         @endif
     </select>
     @error($name)

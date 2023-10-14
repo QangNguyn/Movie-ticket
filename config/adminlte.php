@@ -326,11 +326,15 @@ return [
         //     'icon' => 'fas fa-fw fa-user',
         // ]
         [
+            'text' => 'Dashboard',
+            'url' => 'admin'
+        ],
+        [
             'text' => 'Cinema management',
             'icon' => 'fas fa-fw fa-user',
             'submenu' => [
-                ['text' => 'Cinema', 'url' => 'admin/cinema'],
-                ['text' => 'Room', 'url' => 'admin/room'],
+                ['text' => 'Cinema', 'url' => 'admin/cinema', 'can' => 'cinema'],
+                ['text' => 'Room', 'url' => 'admin/room', 'can' => 'room'],
             ]
         ],
         [
@@ -339,23 +343,39 @@ return [
                 [
                     'text' => 'Category',
                     'url' => 'admin/category',
-                    'icon' => 'fa-solid fa-layer-group'
+                    'icon' => 'fa-solid fa-layer-group',
+                    'can' => 'category',
                 ],
                 [
                     'text' => 'Movie',
                     'url'  => 'admin/movie',
                     'icon' => 'fa-solid fa-clapperboard',
+                    'can' => 'movie',
                 ], [
                     'text' => 'Director',
                     'url'  => 'admin/director',
                     'icon' => 'fas fa-fw fa-user',
+                    'can' => 'director'
                 ],
                 [
                     'text' => 'Performer',
                     'url'  => 'admin/performer',
                     'icon' => 'fas fa-fw fa-user',
+                    'can' => 'performer'
                 ],
             ],
+        ],
+        [
+            'text' => 'User management',
+            'icon' => 'fas fa-fw fa-user',
+            'url' => 'admin/user',
+            'can' => 'user'
+        ],
+        [
+            'text' => 'Group management',
+            'icon' => 'fas fa-fw fa-user',
+            'url' => 'admin/group',
+            'can' => 'group'
         ]
     ],
 
