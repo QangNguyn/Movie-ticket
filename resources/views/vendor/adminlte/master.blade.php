@@ -91,7 +91,7 @@
     @else
         <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
     @endif
-    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>;
+    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
     <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
     {{-- Extra Configured Plugins Scripts --}}
     @include('adminlte::plugins', ['type' => 'js'])

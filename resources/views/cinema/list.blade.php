@@ -9,7 +9,9 @@
             {{ @session('message') }}
         </div>
     @endif
-    <a href={{ route('cinema.create') }} class="btn btn-primary">Add new cinema</a>
+    @can('create', App\Model\Cinema::class)
+        <a href={{ route('cinema.create') }} class="btn btn-primary">Add new cinema</a>
+    @endcan
     <table class="table mt-3">
         <thead>
             <tr>
@@ -28,8 +30,12 @@
                         <td>{{ $value->name }}</td>
                         <td>{{ $value->address }}</td>
                         <td>
-                            <x-form-delete module="cinema" :value="$value" />
-                            <a href="{{ route('cinema.edit', $value) }}" class="btn btn-warning">Edit</a>
+                            @can('delete', App\Model\Cinema::class)
+                                <x-form-delete module="cinema" :value="$value" />
+                            @endcan
+                            @can('update', App\Model\Cinema::class)
+                                <a href="{{ route('cinema.edit', $value) }}" class="btn btn-warning">Edit</a>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

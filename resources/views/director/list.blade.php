@@ -9,7 +9,9 @@
             {{ @session('message') }}
         </div>
     @endif
-    <a href={{ route('director.create') }} class="btn btn-primary">Add new director</a>
+    @can('create', App\Model\Director::class)
+        <a href={{ route('director.create') }} class="btn btn-primary">Add new director</a>
+    @endcan
     <table class="table mt-3">
         <thead>
             <tr>
@@ -31,8 +33,12 @@
                                 alt="">
                         </td>
                         <td>
-                            <x-form-delete module="director" :value='$value' />
-                            <a href="{{ route('director.edit', $value) }}" class="btn btn-warning">Edit</a>
+                            @can('delete', App\Model\Director::class)
+                                <x-form-delete module="director" :value='$value' />
+                            @endcan
+                            @can('update', App\Model\Director::class)
+                                <a href="{{ route('director.edit', $value) }}" class="btn btn-warning">Edit</a>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

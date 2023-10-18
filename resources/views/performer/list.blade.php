@@ -9,7 +9,9 @@
             {{ @session('message') }}
         </div>
     @endif
-    <a href={{ route('performer.create') }} class="btn btn-primary">Add new performer</a>
+    @can('create', App\Models\Performer::class)
+        <a href={{ route('performer.create') }} class="btn btn-primary">Add new performer</a>
+    @endcan
     <table class="table mt-3">
         <thead>
             <tr>
@@ -31,8 +33,12 @@
                                 alt="">
                         </td>
                         <td>
-                            <x-form-delete module="performer" value={{ $value }} />
-                            <a href="{{ route('performer.edit', $value) }}" class="btn btn-warning">Edit</a>
+                            @can('update', App\Model\Performer::class)
+                                <x-form-delete module="performer" :value="$value" />
+                            @endcan
+                            @can('delete', App\Model\Performer::class)
+                                <a href="{{ route('performer.edit', $value) }}" class="btn btn-warning">Edit</a>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

@@ -374,8 +374,7 @@ return [
         [
             'text' => 'Group management',
             'icon' => 'fas fa-fw fa-user',
-            'url' => 'admin/group',
-            'can' => 'group'
+            'url' => 'admin/group'
         ]
     ],
 

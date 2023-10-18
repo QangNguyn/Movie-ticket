@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RoomRequest;
 use App\Models\Cinema;
 use App\Models\Room;
+use Exception;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -63,9 +64,14 @@ class RoomController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Room $room)
+    public function update(RoomRequest $request, Room $room)
     {
-        //
+        try {
+            $room->fill($request->all())->save();
+            return redirect()->route('room.index')->with('message', 'Room updated successfully');
+        } catch (Exception $e) {
+            return back()->with('message', $e->getMessage());
+        }
     }
 
     /**
@@ -73,6 +79,11 @@ class RoomController extends Controller
      */
     public function destroy(Room $room)
     {
-        //
+        try {
+            $room->delete();
+            return back()->with('message', 'Room deleted successfully');
+        } catch (Exception $e) {
+            return back()->with('message', $e->getMessage());
+        }
     }
 }

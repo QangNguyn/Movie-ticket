@@ -15,6 +15,11 @@ class GroupController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->authorizeResource(Group::class, null, ['except' => ['index']]);
+    }
+
     public function index()
     {
         $groups = Group::latest()->paginate(10);
@@ -91,6 +96,7 @@ class GroupController extends Controller
     }
     public function permission(Group $group)
     {
+        $this->authorize('permissions', Group::class);
         $modules = Module::all();
         $roleJson = $group->permissions;
         if (!empty($roleJson)) {
@@ -102,6 +108,7 @@ class GroupController extends Controller
     }
     public function postPermission(Group $group, Request $request)
     {
+        $this->authorize('permissions', Group::class);
         if (!empty($request->role)) {
             $roleArr = $request->role;
         } else {

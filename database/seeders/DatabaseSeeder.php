@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         $groupsId = DB::table('groups')->insertGetId(
-            ['name' => 'Super Admin', 'user_id' => 0]
+            ['name' => 'Super Admin', 'user_id' => 0, 'permissions' => '{"user":["view","add","delete","edit"],"group":["view","add","delete","edit","permissions"],"cinema":["view","add","delete","edit"],"room":["view","add","delete","edit"],"movie":["view","add","delete","edit"],"category":["view","add","delete","edit"],"director":["view","add","delete","edit"],"performer":["view","add","delete","edit"]}']
         );
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
         if ($groupsId) {

@@ -95,7 +95,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         try {
-            if (Auth::user()->id != $user->id) {
+            if (Auth::user()->id != $user->id && $user->user_id != 0) {
                 $user->delete();
                 return back()->with('message', 'Deleted successfully');
             }

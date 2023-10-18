@@ -10,6 +10,11 @@ class CinemaController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->authorizeResource(Cinema::class, null, ['except' => ['index']]);
+    }
+
     public function index()
     {
         $list = Cinema::latest()->paginate(10);

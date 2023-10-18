@@ -10,6 +10,11 @@ class PerformerController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+        $this->authorizeResource(Performer::class, null, ['except' => ['index']]);
+    }
     public function index()
     {
         $performers = Performer::latest()->paginate(10);

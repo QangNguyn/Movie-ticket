@@ -9,7 +9,9 @@
             {{ @session('message') }}
         </div>
     @endif
-    <a href={{ route('movie.create') }} class="btn btn-primary">Add new movie</a>
+    @can('create', App\Model\Movie::class)
+        <a href={{ route('movie.create') }} class="btn btn-primary">Add new movie</a>
+    @endcan
     <table class="table mt-3">
         <thead>
             <tr>
@@ -32,8 +34,12 @@
                         </td>
                         <td>{{ $value->link_trailer }}</td>
                         <td>
-                            <x-form-delete module="movie" :value="$value" />
-                            <a href="{{ route('movie.edit', $value) }}" class="btn btn-warning">Edit</a>
+                            @can('delete', App\Model\Movie::class)
+                                <x-form-delete module="movie" :value="$value" />
+                            @endcan
+                            @can('update', App\Model\Movie::class)
+                                <a href="{{ route('movie.edit', $value) }}" class="btn btn-warning">Edit</a>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

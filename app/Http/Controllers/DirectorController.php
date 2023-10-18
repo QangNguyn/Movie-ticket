@@ -11,6 +11,11 @@ class DirectorController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+        $this->authorizeResource(Director::class, null, ['except' => ['index']]);
+    }
     public function index()
     {
         $directors = Director::latest()->paginate(10);

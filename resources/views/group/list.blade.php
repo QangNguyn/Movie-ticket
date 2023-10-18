@@ -9,14 +9,18 @@
             {{ @session('message') }}
         </div>
     @endif
-    <a href={{ route('group.create') }} class="btn btn-primary">Add new group</a>
+    @can('create', App\Model\Group::class)
+        <a href={{ route('group.create') }} class="btn btn-primary">Add new group</a>
+    @endcan
     <table class="table mt-3">
         <thead>
             <tr>
                 <th scope="col" width="5%">No</th>
                 <th scope="col">Name</th>
                 <th scope="col">Created by</th>
-                <th scope="col">Permissions</th>
+                @can('permissions', App\Model\Group::class)
+                    <th scope="col">Permissions</th>
+                @endcan
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -28,10 +32,16 @@
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $value->name }}</td>
                         <td>{{ !empty($value->user->name) ? $value->user->name : false }}</td>
-                        <td><a href="{{ route('group.permission', $value) }}" class="btn btn-primary">Permissions</a></td>
+                        @can('permissions', App\Model\Group::class)
+                            <td><a href="{{ route('group.permission', $value) }}" class="btn btn-primary">Permissions</a></td>
+                        @endcan
                         <td>
-                            <x-form-delete module="group" :value="$value" />
-                            <a href="{{ route('group.edit', $value) }}" class="btn btn-warning">Edit</a>
+                            @can('delete', App\Model\Group::class)
+                                <x-form-delete module="group" :value="$value" />
+                            @endcan
+                            @can('update', App\Model\Group::class)
+                                <a href="{{ route('group.edit', $value) }}" class="btn btn-warning">Edit</a>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

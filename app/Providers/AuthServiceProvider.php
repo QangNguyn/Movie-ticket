@@ -4,8 +4,14 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 
+use App\Models\Cinema;
 use App\Models\Module;
+use App\Models\Movie;
+use App\Models\Room;
 use App\Models\User;
+use App\Policies\CinemaPolicy;
+use App\Policies\MoviePolicy;
+use App\Policies\RoomPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -18,7 +24,10 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        User::class => UserPolicy::class
+        User::class => UserPolicy::class,
+        Room::class => RoomPolicy::class,
+        Cinema::class => CinemaPolicy::class,
+        Movie::class => MoviePolicy::class
     ];
 
     /**

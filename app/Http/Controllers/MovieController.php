@@ -13,6 +13,11 @@ class MovieController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->authorizeResource(Movie::class, null, ['except' => ['index']]);
+    }
+
     public function index()
     {
         $movies =  Movie::latest()->paginate(10);

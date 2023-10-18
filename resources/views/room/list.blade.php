@@ -9,7 +9,9 @@
             {{ @session('message') }}
         </div>
     @endif
-    <a href={{ route('room.create') }} class="btn btn-primary">Add new room</a>
+    @can('create', App\Model\Room::class)
+        <a href={{ route('room.create') }} class="btn btn-primary">Add new room</a>
+    @endcan
     <table class="table mt-3">
         <thead>
             <tr>
@@ -30,8 +32,12 @@
                             {{ $value->cinema->name }}
                         </td>
                         <td>
-                            <x-form-delete module="room" value={{ $value }} />
-                            <a href="{{ route('room.edit', $value) }}" class="btn btn-warning">Edit</a>
+                            @can('delete', App\Model\Room::class)
+                                <x-form-delete module="room" :value="$value" />
+                            @endcan
+                            @can('create', App\Model\Room::class)
+                                <a href="{{ route('room.edit', $value) }}" class="btn btn-warning">Edit</a>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach
