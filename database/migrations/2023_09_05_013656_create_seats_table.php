@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('seats', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('room_id');
-            $table->string('no');
-            $table->boolean('status');
+            $table->integer('row');
+            $table->integer('column');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

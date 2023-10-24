@@ -16,9 +16,10 @@
         <thead>
             <tr>
                 <th scope="col" width="5%">No</th>
-                <th scope="col" width="30%">Name</th>
-                <th scope="col" width="40%">Cinema</th>
+                <th scope="col" width="20%">Name</th>
+                <th scope="col" width="30%">Cinema</th>
                 <th scope="col">Action</th>
+                <th scope="col" width="10%">Seat</th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +40,8 @@
                                 <a href="{{ route('room.edit', $value) }}" class="btn btn-warning">Edit</a>
                             @endcan
                         </td>
+                        <td><a href="{{ route('seat.create', $value) }}" class="btn btn-primary">Add seat</a></td>
+                        <td><a href="{{ route('seat.view', $value) }}" class="btn btn-success">View</a></td>
                     </tr>
                 @endforeach
             @else
