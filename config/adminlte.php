@@ -331,10 +331,10 @@ return [
         ],
         [
             'text' => 'Cinema management',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fa-solid fa-film',
             'submenu' => [
-                ['text' => 'Cinema', 'url' => 'admin/cinema', 'can' => 'cinema'],
-                ['text' => 'Room', 'url' => 'admin/room', 'can' => 'room'],
+                ['text' => 'Cinema', 'icon' => 'fa-solid fa-film', 'url' => 'admin/cinema', 'can' => 'cinema'],
+                ['text' => 'Room', 'icon' => 'fa-solid fa-hospital', 'url' => 'admin/room', 'can' => 'room'],
             ]
         ],
         [
@@ -374,7 +374,8 @@ return [
         [
             'text' => 'Group management',
             'icon' => 'fas fa-fw fa-user',
-            'url' => 'admin/group'
+            'url' => 'admin/group',
+            'can' => 'group'
         ]
     ],
 

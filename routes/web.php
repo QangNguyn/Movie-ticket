@@ -7,6 +7,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PerformerController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\SeatController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,14 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::resource('performer', PerformerController::class)->middleware('can:performer');
     Route::resource('movie', MovieController::class)->middleware('can:movie');
     Route::resource('category', CategoryController::class)->middleware('can:category');
+
+    Route::get('seat', [SeatController::class, 'index'])->name('seat.index');
+    Route::get('seat/create/{room}', [SeatController::class, 'create'])->name('seat.create');
+    Route::get('seat/{room}', [SeatController::class, 'view'])->name('seat.view');
+    Route::post('seat/{room}', [SeatController::class, 'store'])->name('seat.store');
+    Route::get('seat/{seat}/edit/{room}', [SeatController::class, 'edit'])->name('seat.edit');
+    Route::patch('seat/{seat}/{room}', [SeatController::class, 'update'])->name('seat.update');
+    Route::delete('seat/{seat}', [SeatController::class, 'destroy'])->name('seat.destroy');
 });
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
