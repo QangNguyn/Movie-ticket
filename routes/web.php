@@ -8,6 +8,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PerformerController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SeatController;
+use App\Http\Controllers\ShowtimeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::resource('performer', PerformerController::class)->middleware('can:performer');
     Route::resource('movie', MovieController::class)->middleware('can:movie');
     Route::resource('category', CategoryController::class)->middleware('can:category');
+    Route::resource('showtime', ShowtimeController::class);
 
     Route::get('seat', [SeatController::class, 'index'])->name('seat.index');
     Route::get('seat/create/{room}', [SeatController::class, 'create'])->name('seat.create');

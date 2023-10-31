@@ -11,7 +11,8 @@
         <x-form-input label="Duration" name="duration" type="number" value="{{ old('slug') }}" />
         <x-form-input label="Trailer" name="link_trailer" type="text" value="{{ old('link_trailer') }}" />
         <x-form-select label="Diretor" name="director_id" :options="$directors" />
-        <x-form-select label="Performer" name="performer_id[]" type="select2" :options="$performers" />
+        <x-form-select2 label="Performer" name="performer_id[]" type="select2" :options="$performers" />
+        {{-- <x-form-select label="Performer" name="performer_id[]" type="select2" :options="$performers" /> --}}
         <x-form-textarea label="Description" name="description" :content="old('description')" />
         <x-form-upload name="banner" value="{{ old('banner') }}" />
         <button type="submit" class="btn btn-primary">Submit</button>
