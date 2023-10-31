@@ -2,7 +2,7 @@
     <label for={{ $name }} class="form-label">{{ $label }}</label>
 
     <select class="form-select2 form-select" multiple='multiple' id="{{ $name }}" name="{{ $name }}"
-        aria-label="Default select example">
+        aria-label="Default select example" style="width: 100%">
         @if ($options)
 
             @foreach ($options as $value)

@@ -376,6 +376,11 @@ return [
             'icon' => 'fas fa-fw fa-user',
             'url' => 'admin/group',
             'can' => 'group'
+        ],
+        [
+            'text' => 'Showtime management',
+            'icon' => 'fa-solid fa-clipboard-list',
+            'url' => 'admin/showtime'
         ]
     ],
 
