@@ -1,6 +1,6 @@
 <div class="input-group">
     <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-        <i class="fa fa-picture-o"></i> Choose
+        <i class="fa fa-picture-o"></i> Choose image
     </a>
     </span>
     <input id="thumbnail" type="hidden" value="{{ $value }}" class="form-control" name="{{ $name }}"

@@ -14,6 +14,11 @@
         <x-form-select label="Diretor" name="director_id" :options="$directors" :records="$movie->director" />
         <x-form-select2 label="Performer" name="performer_id[]" type="select2" :records="$movie->performers" :options="$performers" />
         <x-form-textarea label="Description" name="description" content="{{ $movie->description }}" />
+        <div class="form-group mb-3">
+            <input id="status" type="checkbox" name="coming_soon" {{ $movie->status == 1 ? 'checked' : '' }}
+                value="1">
+            <label for="status">Coming soon</label>
+        </div>
         <x-form-upload name="banner" value="{{ $movie->banner }}" />
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

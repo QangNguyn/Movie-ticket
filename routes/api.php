@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\MovieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,18 +17,20 @@ use App\Http\Controllers\Api\AuthController;
 */
 
 
-Route::post('/login',[AuthController::class,'login']);
+Route::post('/login', [AuthController::class, 'login']);
 
 
 
-Route::middleware('auth:sanctum')->group(function(){
-    Route::get('/user',function(Request $request){
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
         return $request->user();
     });
 
-    Route::post('/refresh-token',[AuthController::class,'refresh_token']);
+    Route::post('/refresh-token', [AuthController::class, 'refresh_token']);
 
-    Route::post('/refresh-token',[AuthController::class,'refreshToken']);
+    Route::post('/refresh-token', [AuthController::class, 'refreshToken']);
 
-    Route::post('/logout',[AuthController::class,'logout']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
+Route::get('movies/coming-soon', [MovieController::class, 'comingSoon']);
+Route::apiResource('/movies', MovieController::class);

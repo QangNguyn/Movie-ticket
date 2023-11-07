@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\PersonalAccessToken;
 
 class AuthController extends Controller
@@ -27,9 +28,9 @@ class AuthController extends Controller
 
         $access_token = $newToken->plainTextToken;
 
-//        $token = auth::user()->tokens()->where('name', 'access_token')->first();
-//
-//        $token->expires_at = Carbon::now()->addMinutes(10);
+        //        $token = auth::user()->tokens()->where('name', 'access_token')->first();
+        //
+        //        $token->expires_at = Carbon::now()->addMinutes(10);
 
         $refreshToken = $user->createToken('refresh_token')->plainTextToken;
 
@@ -52,14 +53,11 @@ class AuthController extends Controller
         $token = PersonalAccessToken::find($refreshToken);
 
         if ($token) {
-
         }
-
     }
 
     public function logout()
     {
-
         $user = Auth::user();
 
         $check = $user->currentAccessToken()->delete();
@@ -75,7 +73,6 @@ class AuthController extends Controller
         return response()->json([
             'message' => $message
         ], 400);
-
     }
 
     public function register(Request $request)
@@ -85,20 +82,19 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
-        if($user){
+        if ($user) {
             $code = 200;
             $message = 'register successfully!';
             $status = 'success';
-        }else {
+        } else {
             $code = 400;
             $message = 'failed to register!';
             $status = 'failed';
         }
 
         return response()->json([
-           'message' => $message,
-            'status'=> $status
-        ],$code);
-
+            'message' => $message,
+            'status' => $status
+        ], $code);
     }
 }

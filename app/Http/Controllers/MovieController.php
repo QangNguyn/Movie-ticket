@@ -91,7 +91,7 @@ class MovieController extends Controller
             $movie->delete();
             return redirect()->route('movie.index')->with('message', 'Deleted successfully!');
         } catch (Exception $e) {
-            return back()->with('message', 'Failed to delete');
+            return back()->with('message', $e->getMessage());
         }
     }
 }

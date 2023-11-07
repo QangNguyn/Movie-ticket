@@ -14,6 +14,10 @@
         <x-form-select2 label="Performer" name="performer_id[]" type="select2" :options="$performers" />
         {{-- <x-form-select label="Performer" name="performer_id[]" type="select2" :options="$performers" /> --}}
         <x-form-textarea label="Description" name="description" :content="old('description')" />
+        <div class="form-group mb-3">
+            <input id="status" type="checkbox" name="coming_soon" value="1">
+            <label for="status">Coming soon</label>
+        </div>
         <x-form-upload name="banner" value="{{ old('banner') }}" />
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
