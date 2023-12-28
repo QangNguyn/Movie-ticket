@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MovieCollection;
 use App\Http\Resources\MovieResource;
+use App\Models\Category;
+use App\Models\Director;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
@@ -37,9 +39,9 @@ class MovieController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($slug)
     {
-        $movie = Movie::with(['performers', 'director'])->find($id);
+        $movie = Movie::with(['performers', 'director','categories'])->where('slug', $slug)->first();
         if ($movie) {
             $message = 'Successfully';
             $statusCode = 200;
@@ -69,6 +71,54 @@ class MovieController extends Controller
         return new MovieCollection($comingSoonMovies, $statusCode, $message);
     }
 
+    public function categoryMovies($id)
+    {
+        $category = Category::find($id);
+        if ($category) {
+            $movies = $category->movies()->with(['director', 'performers','categories'])->latest()->get();
+            if ($movies->count() > 0) {
+                $message = 'Successfully';
+                $statusCode = 200;
+            } else {
+                $message = 'Failed';
+                $statusCode = 404;
+            }
+            return new MovieCollection($movies, $statusCode, $message);
+        }
+        return response()->json([
+            'statusCode' => 404,
+            'message' => 'Not found',
+        ]);
+    }
+
+    public function nowPlaying()
+    {
+        $movies = Movie::with(['director', 'performers', 'categories'])->where('coming_soon', 0)->latest()->paginate(10);
+        if ($movies->count() > 0) {
+            $message = 'Successfully';
+            $statusCode = 200;
+        } else {
+            $message = 'Failed';
+            $statusCode = 404;
+        }
+        return new MovieCollection($movies, $statusCode, $message);
+    }
+
+    public function directorMovies($id)
+    {
+        $director = Director::find($id);
+        if ($director) {
+            $movies = $director->movies()->with(['director', 'performers'])->latest()->get();
+            if ($movies->count() > 0) {
+                $message = 'Successfully';
+                $statusCode = 200;
+            } else {
+                $message = 'Failed';
+                $statusCode = 404;
+            }
+            return new MovieCollection($movies, $statusCode, $message);
+        }
+    }
     /**
      * Update the specified resource in storage.
      */

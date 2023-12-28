@@ -12,6 +12,6 @@ class Category extends Model
     protected $fillable = ['name', 'slug', 'description'];
     public function movies()
     {
-        // return $this->
+        return $this->belongsToMany(Movie::class, 'category_movies')->withTimestamps();
     }
 }

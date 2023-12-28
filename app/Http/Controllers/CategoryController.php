@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Exception;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -12,7 +13,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $list = Category::latest()->paginate(10);
+        return view('category.list', compact('list'));
     }
 
     /**
@@ -20,7 +22,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.add');
     }
 
     /**
@@ -28,7 +30,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $category = new Category();
+            $category->fill($request->all())->save();
+            return redirect()->route('category.index')->with('message', 'Add category successfully');
+        } catch (Exception $e) {
+            return back()->with('message', $e->getMessage());
+        }
     }
 
     /**
@@ -44,7 +52,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('category.edit', compact('category'));
     }
 
     /**
@@ -52,7 +60,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        try {
+            $category->fill($request->all())->save();
+            return redirect()->route('category.index')->with('message', 'Update category successfully');
+        } catch (Exception $e) {
+            return back()->with('message', $e->getMessage());
+        }
     }
 
     /**
@@ -60,6 +73,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        try {
+            $category->delete();
+            return back()->with('message', 'Deleted successfully');
+        } catch (Exception $e) {
+            return back()->with('message', $e->getMessage());
+        }
     }
 }

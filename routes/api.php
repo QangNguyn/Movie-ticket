@@ -32,5 +32,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });
-Route::get('movies/coming-soon', [MovieController::class, 'comingSoon']);
+Route::get('/movies/coming-soon', [MovieController::class, 'comingSoon']);
+Route::get('/movies/now-playing', [MovieController::class, 'nowPlaying']);
+Route::get('/movies/category/{id}', [MovieController::class, 'categoryMovies']);
+Route::get('/movies/director/{id}', [MovieController::class, 'directorMovies']);
 Route::apiResource('/movies', MovieController::class);

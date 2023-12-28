@@ -17,10 +17,13 @@ class MovieResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'slug' => $this->slug,
             'duration' => $this->duration,
-            'banner' => $this->banner,
+            'description'=>$this->description,
+            'banner' => url('/') . $this->banner,
             'link_trailer' => $this->link_trailer,
             'director' => $this->whenLoaded('director'),
+            'categories' => $this->whenLoaded('categories'),
             'performers' => PerformerResource::collection($this->whenLoaded('performers'))
         ];
     }

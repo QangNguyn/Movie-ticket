@@ -10,4 +10,8 @@ class Director extends Model
     use HasFactory;
     protected $table = 'directors';
     protected $guarded = [];
+    public function movies()
+    {
+        return $this->hasMany(Movie::class);
+    }
 }

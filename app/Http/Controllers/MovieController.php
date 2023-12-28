@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use App\Models\Director;
@@ -31,7 +32,8 @@ class MovieController extends Controller
     {
         $directors = Director::all();
         $performers = Performer::all();
-        return view('movie.add', compact('directors', 'performers'));
+        $categories = Category::all();
+        return view('movie.add', compact('directors', 'performers', 'categories'));
     }
 
     /**
@@ -43,6 +45,7 @@ class MovieController extends Controller
             $movie = new Movie();
             $movie->fill($request->all())->save();
             $movie->performers()->attach($request->performer_id);
+            $movie->categories()->attach($request->category_id);
             return redirect()->route('movie.index')->with('message', 'Created successfully');
         } catch (Exception $e) {
             return back()->with('message', $e->getMessage());
@@ -64,7 +67,8 @@ class MovieController extends Controller
     {
         $directors = Director::all();
         $performers = Performer::all();
-        return view('movie.edit', compact('directors', 'performers', 'movie'));
+        $categories = Category::all();
+        return view('movie.edit', compact('directors', 'performers', 'movie', 'categories'));
     }
 
     /**
@@ -73,8 +77,10 @@ class MovieController extends Controller
     public function update(Request $request, Movie $movie)
     {
         try {
+            $movie->coming_soon = $request->coming_soon ? $request->coming_soon : 0;
             $movie->fill($request->all())->save();
             $movie->performers()->sync($request->performer_id);
+            $movie->categories()->sync($request->category_id);
             return redirect()->route('movie.index')->with('message', "updated successfully");
         } catch (Exception $e) {
             return back()->with('message', $e->getMessage());
@@ -88,6 +94,7 @@ class MovieController extends Controller
     {
         try {
             $movie->performers()->detach();
+            $movie->categories()->detach();
             $movie->delete();
             return redirect()->route('movie.index')->with('message', 'Deleted successfully!');
         } catch (Exception $e) {

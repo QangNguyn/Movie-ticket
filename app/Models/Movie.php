@@ -19,4 +19,13 @@ class Movie extends Model
     {
         return $this->belongsToMany(Performer::class, 'performer_movies')->withTimestamps();
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_movies')->withTimestamps();
+    }
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
